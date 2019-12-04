@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+  <table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th>Tasks</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+        <tr>
+          <td>{{ post.task }}</td>
+          <td>{{ post.description }}</td>
+          <td>{{ post.due_date.strftime('%d/%m/%Y') }}</td>
+          <td><a href="{{url_for('task_update',post_id=post.id)}}">Edit</a>|<a href="{{url_for('task_delete',post_id=post.id)}}">Delete</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{{url_for('task_add')}}" class="btn btn-outline-secondary btn-lg active" role="button" aria-pressed="true">Add Task</a>
+{% endblock content %}
